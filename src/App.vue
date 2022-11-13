@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="container ">
+        <login 
+        class="d-flex justify-content-center m-3"
+        v-on:logged="exist = $event"
+        ></login>
+        <div v-if="exist.userName">
+            <send-message 
+            :data=exist
+            ></send-message>
+            <reception-message :data=exist ></reception-message>
+        </div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Login from './components/Login.vue';
+import ReceptionMessage from './components/ReceptionMessage.vue';
+import SendMessage from './components/SendMessage.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    name: 'App',
+    components: {
+        Login,
+        SendMessage,
+        ReceptionMessage
+    },
+    data(){
+        return{
+          exist:{}
+        }
+    }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
